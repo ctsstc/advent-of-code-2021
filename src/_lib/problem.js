@@ -13,6 +13,10 @@ class Problem {
     return this.#lines
   }
 
+  get linesAsInts() {
+    return this.#lines.map((line) => parseInt(line))
+  }
+
   #readLines() {
     return readFileSync(this.#fileName, 'utf8').split('\n')
   }
