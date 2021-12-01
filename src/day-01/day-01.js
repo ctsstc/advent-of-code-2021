@@ -7,11 +7,8 @@ class Day01 extends Problem {
 
   solvePart1 = () =>
     this.linesAsInts.reduce(
-      (results, current) => {
-        let { previous, count } = results
-        if (current > previous) {
-          count++
-        }
+      ({ previous, count }, current) => {
+        if (current > previous) count++
         return { previous: current, count }
       },
       { previous: this.linesAsInts[0], count: 0 },
