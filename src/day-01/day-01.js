@@ -5,8 +5,8 @@ class Day01 extends Problem {
     super(inputFileName)
   }
 
-  solvePart1() {
-    return this.linesAsInts.reduce(
+  solvePart1 = () =>
+    this.linesAsInts.reduce(
       (results, current) => {
         let { previous, count } = results
         if (current > previous) {
@@ -16,7 +16,6 @@ class Day01 extends Problem {
       },
       { previous: this.linesAsInts[0], count: 0 },
     ).count
-  }
 
   solvePart2() {
     let previous =
