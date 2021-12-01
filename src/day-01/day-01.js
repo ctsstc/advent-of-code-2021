@@ -7,9 +7,8 @@ class Day01 extends Problem {
 
   solvePart1() {
     const first = parseInt(this.lines[0])
-    return this.lines.reduce(
-      (results, line) => {
-        const current = parseInt(line)
+    return this.linesAsInts.reduce(
+      (results, current) => {
         let { previous, count } = results
         if (current > previous) {
           count++
@@ -21,7 +20,20 @@ class Day01 extends Problem {
   }
 
   solvePart2() {
-    return parseInt(this.solvePart1())
+    let previous =
+      this.linesAsInts[0] + this.linesAsInts[1] + this.linesAsInts[2]
+    let count = 0
+
+    for (let i = 3; i < this.linesAsInts.length - 2; i++) {
+      const current =
+        this.linesAsInts[i] + this.linesAsInts[i + 1] + this.linesAsInts[i + 2]
+      if (current > previous) {
+        count++
+      }
+      previous = current
+    }
+
+    return count
   }
 }
 
