@@ -13,20 +13,20 @@ describe('Day 00', () => {
       expect(problem.solvePart1()).toBe('123')
     })
 
-    it('solves part 2', () => {
-      expect(problem.solvePart2()).toBe(123)
-    })
+    // it('solves part 2', () => {
+    //   expect(problem.solvePart2()).toBe(123)
+    // })
   })
 
   describe('input.txt', () => {
     const problem = new Problem(__dirname + '/input.txt')
 
-    it('solves part 1', () => {
-      expect(problem.solvePart1()).toBe('456789')
-    })
+    // it('solves part 1', () => {
+    //   expect(problem.solvePart1()).toBe('456789')
+    // })
 
-    it('solves part 2', () => {
-      expect(problem.solvePart2()).toBe(456789)
-    })
+    // it('solves part 2', () => {
+    //   expect(problem.solvePart2()).toBe(456789)
+    // })
   })
 })
