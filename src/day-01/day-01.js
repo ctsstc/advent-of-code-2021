@@ -6,7 +6,6 @@ class Day01 extends Problem {
   }
 
   solvePart1() {
-    const first = parseInt(this.lines[0])
     return this.linesAsInts.reduce(
       (results, current) => {
         let { previous, count } = results
@@ -15,7 +14,7 @@ class Day01 extends Problem {
         }
         return { previous: current, count }
       },
-      { previous: first, count: 0 },
+      { previous: this.linesAsInts[0], count: 0 },
     ).count
   }
 
