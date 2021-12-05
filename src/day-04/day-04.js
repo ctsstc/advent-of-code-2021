@@ -12,7 +12,8 @@ class Day04 extends Problem {
 
   solvePart1() {
     let winningBoard
-    const winningNumber = this.#calls.find((number) => {
+
+    this.#calls.find((number) => {
       this.#boards.forEach((board) => board.mark(number))
       winningBoard = this.#boards.find((board) => board.isWinner)
       return winningBoard
@@ -22,7 +23,29 @@ class Day04 extends Problem {
   }
 
   solvePart2() {
-    return parseInt(this.solvePart1())
+    // Reset the state of the boards; I lost too much sanity not doing this
+    // Not great but it'll do
+    this.#boards = this.#getBoards()
+    // go until there are no more boards left
+    // if there are no more calls left then return the last board
+    const winningBoards = []
+
+    for (let i = 0; i < this.#calls.length; i++) {
+      const number = this.#calls[i]
+      const stillPlaying = this.#boards.filter((board) => !board.isWinner)
+      stillPlaying.forEach((board) => board.mark(number))
+
+      const nextWinningBoard = stillPlaying.find((board) => board.isWinner)
+      if (nextWinningBoard) {
+        winningBoards.push(nextWinningBoard)
+      }
+
+      if (winningBoards.length === this.#boards.length) break
+    }
+
+    const lastWinningBoard = winningBoards[winningBoards.length - 1]
+
+    return lastWinningBoard.getScore()
   }
 
   #getCalls() {

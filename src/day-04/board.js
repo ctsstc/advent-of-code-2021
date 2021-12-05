@@ -35,12 +35,15 @@ export default class Board {
   }
 
   getScore() {
+    return this.#sumNotPicked() * this.#lastMarked
+  }
+
+  #sumNotPicked() {
     const notPicked = [...this.#numbers.keys()].filter((number) => {
       const numberSlot = this.#numbers.get(number)
       return !numberSlot.picked
     })
-    const sumNotPicked = notPicked.reduce((acc, curr) => acc + curr, 0)
-    return sumNotPicked * this.#lastMarked
+    return notPicked.reduce((acc, curr) => acc + curr, 0)
   }
 
   #removeEmpty(x) {
@@ -81,6 +84,17 @@ export default class Board {
       [...this.#rows.values()].some((y) => y.val >= this.#width) ||
       [...this.#cols.values()].some((x) => x.val >= this.#height)
     )
+  }
+
+  debug() {
+    console.log('Winner', this.#winner)
+    console.log('Sum not picked:', this.#sumNotPicked())
+    console.log('Last marked:', this.#lastMarked)
+    console.log([...this.#numbers.keys()])
+  }
+
+  toString() {
+    return [...this.#numbers.keys()].toString()
   }
 }
 
