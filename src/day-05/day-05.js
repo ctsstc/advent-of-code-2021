@@ -2,18 +2,19 @@ import Problem from '../_lib/problem.js'
 
 class Day05 extends Problem {
   #pairPoints = this.#getPairPoints()
-  #occurrences = this.#getOccurrences()
+  #occurrences1 = this.#getOccurrences1()
+  #occurrences2 = this.#getOccurrences2()
 
   constructor(inputFileName) {
     super(inputFileName)
   }
 
   solvePart1() {
-    return [...this.#occurrences.values()].filter((x) => x.val > 1).length
+    return [...this.#occurrences1.values()].filter((x) => x.val > 1).length
   }
 
   solvePart2() {
-    return parseInt(this.solvePart1())
+    return [...this.#occurrences2.values()].filter((x) => x.val > 1).length
   }
 
   #getPairPoints() {
@@ -38,13 +39,13 @@ class Day05 extends Problem {
   /**
    * @return {Map<string, { val: number }>}
    */
-  #getOccurrences() {
+  #getOccurrences1() {
     return this.#pairPoints
       .filter(({ diagonal }) => !diagonal)
       .reduce((map, pairPoint) => {
         const { firstPoint, secondPoint, horizontal } = pairPoint
-        let [x1, y1] = firstPoint
-        let [x2, y2] = secondPoint
+        const [x1, y1] = firstPoint
+        const [x2, y2] = secondPoint
 
         const stable = horizontal ? y1 : x1
         const getKey = (changing) =>
@@ -66,6 +67,47 @@ class Day05 extends Problem {
 
         return map
       }, new Map())
+  }
+
+  /**
+   * @return {Map<string, { val: number }>}
+   */
+  #getOccurrences2() {
+    // clone the first answer's map to build upon
+    const occurrences1Copy = this.#getOccurrences1()
+
+    return this.#pairPoints
+      .filter(({ diagonal }) => diagonal)
+      .reduce((map, pairPoint) => {
+        const { firstPoint, secondPoint } = pairPoint
+        const [x1, y1] = firstPoint
+        const [x2, y2] = secondPoint
+
+        const positiveX = x1 < x2
+        const positiveY = y1 < y2
+        const xChange = positiveX ? 1 : -1
+        const yChange = positiveY ? 1 : -1
+
+        const diff = Math.abs(x1 - x2)
+
+        let cx = x1
+        let cy = y1
+        for (let i = 0; i <= diff; i++) {
+          const key = `${cx},${cy}`
+          cx += xChange
+          cy += yChange
+          // console.log('DIAG KEY', key)
+          const coord = map.get(key)
+
+          if (coord) {
+            coord.val++
+          } else {
+            map.set(key, { val: 1 })
+          }
+        }
+
+        return map
+      }, occurrences1Copy)
   }
 }
 
