@@ -94,9 +94,6 @@ class Day05 extends Problem {
         let cy = y1
         for (let i = 0; i <= diff; i++) {
           const key = `${cx},${cy}`
-          cx += xChange
-          cy += yChange
-          // console.log('DIAG KEY', key)
           const coord = map.get(key)
 
           if (coord) {
@@ -104,6 +101,9 @@ class Day05 extends Problem {
           } else {
             map.set(key, { val: 1 })
           }
+
+          cx += xChange
+          cy += yChange
         }
 
         return map

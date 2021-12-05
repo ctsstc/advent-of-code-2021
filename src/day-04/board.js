@@ -86,16 +86,16 @@ export default class Board {
     )
   }
 
-  debug() {
-    console.log('Winner', this.#winner)
-    console.log('Sum not picked:', this.#sumNotPicked())
-    console.log('Last marked:', this.#lastMarked)
-    console.log([...this.#numbers.keys()])
-  }
+  // debug() {
+  //   console.log('Winner', this.#winner)
+  //   console.log('Sum not picked:', this.#sumNotPicked())
+  //   console.log('Last marked:', this.#lastMarked)
+  //   console.log([...this.#numbers.keys()])
+  // }
 
-  toString() {
-    return [...this.#numbers.keys()].toString()
-  }
+  // toString() {
+  //   return [...this.#numbers.keys()].toString()
+  // }
 }
 
 class NumberSlot {
