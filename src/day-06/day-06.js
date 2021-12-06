@@ -1,6 +1,8 @@
 import Problem from '../_lib/problem.js'
 
 class Day06 extends Problem {
+  #newDaysToSpawn = 8
+  #resetDaysToSpawn = 6
   #fish = this.#initialFish()
 
   constructor(inputFileName) {
@@ -19,37 +21,28 @@ class Day06 extends Problem {
     return this.lines[0]
       .split(',')
       .map((num) => parseInt(num))
-      .reduce(
-        (counts, num) => {
-          counts[num]++
-          return counts
-        },
-        {
-          0: 0,
-          1: 0,
-          2: 0,
-          3: 0,
-          4: 0,
-          5: 0,
-          6: 0,
-          7: 0,
-          8: 0,
-        },
-      )
+      .reduce((counts, num) => {
+        counts[num]++
+        return counts
+      }, this.#emptySpawnDates())
+  }
+
+  #emptySpawnDates() {
+    // Wish we had ranges in JS
+    return [...Array(this.#newDaysToSpawn + 1)].reduce((counts, _, i) => {
+      counts[i] = 0
+      return counts
+    }, {})
   }
 
   #runFishForDays(fish, daysToSpawn) {
-    const newDaysToSpawn = 8
-    const resetDaysToSpawn = 6
-    let newFish = 0
-
     for (let day = 1; day <= daysToSpawn; day++) {
-      newFish = fish[0]
-      for (let i = 1; i <= newDaysToSpawn; i++) {
+      let newFish = fish[0]
+      for (let i = 1; i <= this.#newDaysToSpawn; i++) {
         fish[i - 1] = fish[i]
       }
-      fish[newDaysToSpawn] = newFish
-      fish[resetDaysToSpawn] += newFish
+      fish[this.#newDaysToSpawn] = newFish
+      fish[this.#resetDaysToSpawn] += newFish
     }
 
     return Object.values(fish).reduce((sum, fish) => sum + fish, 0)
