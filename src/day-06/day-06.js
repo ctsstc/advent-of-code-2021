@@ -28,11 +28,11 @@ class Day06 extends Problem {
   }
 
   #emptySpawnDates() {
-    // Wish we had ranges in JS
-    return [...Array(this.#newDaysToSpawn + 1)].reduce((counts, _, i) => {
-      counts[i] = 0
-      return counts
-    }, {})
+    const spawnDates = {}
+    for (let i = 0; i <= this.#newDaysToSpawn; i++) {
+      spawnDates[i] = 0
+    }
+    return spawnDates
   }
 
   #runFishForDays(fish, daysToSpawn) {
