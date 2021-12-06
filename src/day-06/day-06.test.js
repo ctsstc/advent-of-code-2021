@@ -13,9 +13,9 @@ describe('Day 06', () => {
       expect(problem.solvePart1()).toBe(5934)
     })
 
-    // it('solves part 2', () => {
-    //   expect(problem.solvePart2()).toBe(26984457539)
-    // })
+    it('solves part 2', () => {
+      expect(problem.solvePart2()).toBe(26984457539)
+    })
   })
 
   describe('input.txt', () => {
@@ -25,8 +25,8 @@ describe('Day 06', () => {
       expect(problem.solvePart1()).toBe(375482)
     })
 
-    // it('solves part 2', () => {
-    //   expect(problem.solvePart2()).toBe(456789)
-    // })
+    it('solves part 2', () => {
+      expect(problem.solvePart2()).toBe(1689540415957)
+    })
   })
 })
