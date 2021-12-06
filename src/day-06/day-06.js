@@ -8,9 +8,20 @@ class Day06 extends Problem {
   }
 
   solvePart1() {
+    return this.#runFishForDays(80)
+  }
+
+  solvePart2() {
+    return this.#runFishForDays(256)
+  }
+
+  #initialFish() {
+    return this.lines[0].split(',').map((num) => parseInt(num))
+  }
+
+  #runFishForDays(daysToSpawn) {
     const newDaysToSpawn = 8
     const resetDaysToSpawn = 6
-    const daysToSpawn = 80
     let newFish = []
 
     for (let day = 1; day <= daysToSpawn; day++) {
@@ -28,14 +39,6 @@ class Day06 extends Problem {
     }
 
     return this.#fish.length
-  }
-
-  solvePart2() {
-    return parseInt(this.solvePart1())
-  }
-
-  #initialFish() {
-    return this.lines[0].split(',').map((num) => parseInt(num))
   }
 }
 

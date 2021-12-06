@@ -14,7 +14,7 @@ describe('Day 06', () => {
     })
 
     // it('solves part 2', () => {
-    //   expect(problem.solvePart2()).toBe(123)
+    //   expect(problem.solvePart2()).toBe(26984457539)
     // })
   })
 
